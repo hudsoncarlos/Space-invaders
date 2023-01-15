@@ -7,7 +7,7 @@ canvas.height = innerHeight;
 class Player{
     constructor(){
         this.position = {
-            x: 200,
+            x: canvas.width / 2 - this.width / 2,
             y: 200
         }
 
@@ -24,6 +24,10 @@ class Player{
         this.image = image
         this.width = image.width * scale
         this.height = image.height * scale
+        this.position = {
+            x: canvas.width / 2 - this.width / 2,
+            y: canvas.height - this.height - 20
+        }
     }
 
 }
@@ -48,3 +52,7 @@ function animate(){
 }
 
 animate()
+
+addEventListener('keydown', () => {
+    console.log(event.key)
+})
