@@ -36,13 +36,26 @@ class Player{
         // c.fillStyle = 'red'
         // c.fillRect(this.position.x, this.position.y, this.width, this.height)
         
-        if(this.image)
-        c.drawImage(this.image, this.position.x, this.position.y, this.width, this.height)
+        c.drawImage(
+            this.image,
+            this.position.x,
+            this.position.y,
+            this.width,
+            this.height
+            )
     }
+
+    update(){
+        if(this.image){
+        this.draw()
+        this.position.x += this.velocity.x
+    }
+ }
+    
 }
 
 const player = new Player()
-player.draw()
+player.update()
 
 function animate(){
     requestAnimationFrame(animate)
@@ -56,6 +69,7 @@ animate()
 addEventListener('keydown', ({key}) => {
     switch (key){
         case 'a':
+            player.velocity.x = -5
             console.log('left')
         break;
         case 'd':
