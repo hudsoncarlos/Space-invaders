@@ -63,7 +63,6 @@ class Player{
         if(this.image){
         this.draw()
         this.position.x += this.velocity.x
-        this.position.y += this.velocity.y
         }
     }
     
@@ -144,12 +143,12 @@ addEventListener('keydown', ({key}) => {
             keys.space.pressed = true
             projectiles.push(new Projectile({
                 position: {
-                    x: player.position.x,
+                    x: player.position.x + player.width / 2,
                     y: player.position.y
                 },
                 velocity: {
-                    x: 5,
-                    y: 0
+                    x: 0,
+                    y: -10
                 }
             }))
         break;
