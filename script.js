@@ -69,11 +69,7 @@ class Player{
 }
 
 class Invader{
-    constructor(){
-        this.position = {
-            x: canvas.width / 2 - this.width / 2,
-            y: 200
-        }
+    constructor({position}){
 
         this.velocity = {
             x: 0,
@@ -89,8 +85,8 @@ class Invader{
         this.width = image.width * scale
         this.height = image.height * scale
         this.position = {
-            x: canvas.width / 2 - this.width / 2,
-            y: canvas.height / 2
+            x: position.x,
+            y: position.y
         }
     }
 
@@ -138,9 +134,39 @@ class Projectile {
     }
 }
 
+class Grid {
+    constructor(){
+        this.position = {
+            x: 0,
+            y: 0
+        },
+        this.velocity = {
+            x: 0,
+            y: 0
+        }
+        this.invaders = []
+
+    for (let x = 0; x < 10; x++){
+        for (let y = 0; y < 10; y++){
+            this.invaders.push(
+                new Invader({
+                    position: {
+                        x: x*30,
+                        y: y*30
+                    }
+                }))
+        }
+    }
+}
+
+    update(){
+
+    }
+}
+
 const player = new Player()
 const projectiles = []
-const invader = new Invader()
+const grids = [new Grid()]
 const keys = {
     a: {
         pressed: false,
@@ -160,7 +186,6 @@ function animate(){
     c.fillStyle = 'black'
     c.fillRect(0, 0, canvas.width, canvas.height)
     player.update()
-    invader.update()
 
     projectiles.forEach((projectile, index) => {
         if(projectile.position.y + projectile.radius <= 0){
@@ -171,6 +196,13 @@ function animate(){
         else{
             projectile.update()
         }
+    })
+
+    grids.forEach(grid => {
+        grid.update()
+        grid.invaders.forEach(invader => {
+            invader.update()
+        })
     })
 
     if(keys.a.pressed && player.position.x >= 0){
