@@ -38,7 +38,18 @@ class Player{
         // c.fillStyle = 'red'
         // c.fillRect(this.position.x, this.position.y, this.width, this.height)
         
+        
         c.save()
+        c.translate(
+        player.position.x + player.width / 2,
+        player.position.y + player.height / 2
+        )
+        c.rotate(this.rotation)
+
+        c.translate(
+            -player.position.x - player.width / 2,
+            -player.position.y - player.height / 2
+            )
 
         c.drawImage(
             this.image,
@@ -90,6 +101,7 @@ function animate(){
     }
     else {
         player.velocity.x = 0
+        player.rotation = 0
     }
 }
 
