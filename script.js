@@ -236,8 +236,23 @@ function animate(){
     c.fillRect(0, 0, canvas.width, canvas.height)
     player.update()
     
-    invaderProjectiles.forEach((invaderProjectile) => {
-        invaderProjectile.update() 
+    invaderProjectiles.forEach((invaderProjectile, index) => {
+
+        if(invaderProjectile.position.y + invaderProjectile.height >= canvas.height){
+            setTimeout(() => {
+                invaderProjectiles.splice(index, 1)
+            }, 0)
+        }
+        else{
+            invaderProjectile.update()
+        }
+
+        if(invaderProjectile.position.y + invaderProjectile.height >= player.position.y &&
+            invaderProjectile.position.x + invaderProjectile.width >= player.position.x &&
+            invaderProjectile.position.x <= player.position.x + player.width){
+
+            alert('You lose! :(')
+        }
     })
 
     projectiles.forEach((projectile, index) => {
