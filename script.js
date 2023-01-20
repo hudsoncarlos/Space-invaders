@@ -164,6 +164,8 @@ class Particle {
         c.fillStyle = this.color
         c.fill()
         c.closePath()
+
+        c.restore()
     }
 
     update(){
@@ -375,7 +377,7 @@ function animate(){
     if (frames % randomInterval === 0){
         grids.push(new Grid())
         randomInterval = Math.floor(Math.random() * 500 + 500)
-        frames = 0
+        frames = 0 
     }
     console.log(frames)
 
