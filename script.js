@@ -379,7 +379,7 @@ function animate(){
         randomInterval = Math.floor(Math.random() * 500 + 500)
         frames = 0 
     }
-    console.log(frames)
+    // console.log(frames)
 
     frames++
 }
