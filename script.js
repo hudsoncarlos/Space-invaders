@@ -173,7 +173,7 @@ class Particle {
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
 
-        if(this.fades) this. opacity -= 0.01
+        if(this.fades) this.opacity -= 0.01
     }
 }
 
@@ -280,8 +280,8 @@ for (let i = 0; i < 100; i++){
     for (let i = 0; i < 15; i++){  
         particles.push(new Particle({
              position: {
-                 x: object.position.x * object.width / 2,
-                 y: object.position.y * object.height / 2
+                 x: object.position.x + object.width / 2,
+                 y: object.position.y + object.height / 2
              },
              velocity: {
                  x: (Math.random() - .5) * 2,
@@ -302,6 +302,12 @@ function animate(){
 
     particles.forEach((particle, i) => {
        
+
+    if(particle.position.y - particle.radius >= canvas.height){
+        particle.position.x = Math.random() * canvas.width
+        particle.position.y = -particle.radius
+    }
+
        if(particle.opacity <= 0){
         setTimeout(() => {
             particles.splice(i, 1)
