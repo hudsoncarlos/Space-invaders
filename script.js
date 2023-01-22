@@ -17,6 +17,7 @@ class Player{
         }
 
         this.rotation = 0
+        this.opacity = 1
 
         const image = new Image()
         image.src = './assets/img/spaceship.png'
@@ -37,6 +38,7 @@ class Player{
     draw(){
         
         c.save()
+        c.globalAlpha = this.opacity
         c.translate(
         player.position.x + player.width / 2,
         player.position.y + player.height / 2
@@ -260,6 +262,10 @@ const keys = {
 
 let frames = 0
 let randomInterval = Math.floor(Math.random() * 500 + 500)
+let game = {
+    over: false,
+    active: false
+}
 
 for (let i = 0; i < 100; i++){  
     particles.push(new Particle({
@@ -269,7 +275,7 @@ for (let i = 0; i < 100; i++){
          },
          velocity: {
              x: 0,
-             y: 1
+             y: .3
          },
          radius: Math.random() * 2,
          color: 'white',
@@ -335,7 +341,9 @@ function animate(){
 
             setTimeout(() => {
                     invaderProjectiles.splice(index, 1)
-            }, 0)
+                    player.opacity = 0
+                    game.over = true
+                }, 0)
 
             createParticles({
                 object: player,
@@ -434,6 +442,9 @@ function animate(){
 animate()
 
 addEventListener('keydown', ({key}) => {
+ 
+    if(game.over) return
+ 
     switch (key){
         case 'a':
             keys.a.pressed = true
