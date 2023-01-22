@@ -1,5 +1,6 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
+const scoreEl = document.getElementById('score')
 
 canvas.width = innerWidth;
 canvas.height = innerHeight;
@@ -267,6 +268,8 @@ let game = {
     active: true
 }
 
+let score = 0
+
 for (let i = 0; i < 100; i++){  
     particles.push(new Particle({
          position: {
@@ -350,7 +353,7 @@ function animate(){
 
             setTimeout(() => {
                 game.active = false
-                
+
             }, 1000)
 
             createParticles({
@@ -400,6 +403,9 @@ function animate(){
                         )
 
                         if(invaderFound && projectileFound){
+                            score += 100
+                            scoreEl.innerHTML = score
+                            
                             createParticles({
                                 object: invader,
                                 fades: true
